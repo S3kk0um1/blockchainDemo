@@ -1,7 +1,9 @@
 package com.pm.blockchain.blockchain;
 
 import com.pm.blockchain.transaction.Transaction;
+import com.pm.blockchain.transaction.TransactionInput;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -37,8 +39,11 @@ public class Block {
         return previousHash;
     }
 
-    public void mineBlock(int difficulty) {
+    public void mineBlock(int difficulty, PublicKey minerPublicKey) {
+        Transaction rewardTransaction = new Transaction(null,minerPublicKey,TestChain.miningReward,new ArrayList<TransactionInput>());
+        addTransaction(rewardTransaction);
         merkleRoot = StringUtil.getMerkleRoot(transactions);
+        hash = calculateHash();
         String target = new String(new char[difficulty]).replace('\0', '0');
         while (!hash.substring(0, difficulty).equals(target)) {
             nonce++;
@@ -48,14 +53,12 @@ public class Block {
     }
 
     public boolean addTransaction(Transaction transaction) {
-        //process transaction and check if valid, unless block is genesis block then ignore.
         if(transaction == null) return false;
-        if((previousHash != "0")) {
-            if((transaction.processTransaction() != true)) {
-                System.out.println("Transaction failed to process. Discarded.");
-                return false;
-            }
+        if((!transaction.processTransaction())) {
+            System.out.println("Transaction failed to process. Discarded.");
+            return false;
         }
+
         transactions.add(transaction);
         System.out.println("Transaction Successfully added to Block");
         return true;
