@@ -14,8 +14,8 @@ public class StringUtil {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             //Applies sha256 to our input,
             byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder(); // This will contain hash as hexidecimal
-            for (byte b : hash) {
+            StringBuilder hexString = new StringBuilder(); // This will contain hash as hexadecimal
+            for (byte b : hash) { //convert the hash to an hexadecimal format
                 String hex = Integer.toHexString(0xff & b);
                 if (hex.length() == 1) hexString.append('0');
                 hexString.append(hex);

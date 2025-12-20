@@ -9,7 +9,7 @@ public class Block {
 
     private String hash;
     private final String previousHash;
-    private final long timeStamp; //as number of milliseconds since 1/1/1970.
+    private final long timeStamp;
     private int nonce;
     public String merkleRoot;
     public ArrayList<Transaction> transactions = new ArrayList<Transaction>(); //our data will be a simple message.

@@ -13,4 +13,5 @@ public class TestChain {
     public static Wallet walletA;
     public static Wallet walletB;
     public static float minimumTransaction = 0.01f;
+
 }
