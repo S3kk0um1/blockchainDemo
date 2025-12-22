@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class TestChain {
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
     public static HashMap<String, TransactionOutput> UTXOs = new HashMap<String, TransactionOutput>(); //list of all unspent transactions.
-    public static int difficulty = 5;
+    public static int difficulty = 6;
     public static Wallet walletA;
     public static Wallet walletB;
     public static float minimumTransaction = 0.01f;

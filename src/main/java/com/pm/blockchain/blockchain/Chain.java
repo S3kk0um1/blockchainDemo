@@ -2,9 +2,12 @@ package com.pm.blockchain.blockchain;
 
 import java.util.ArrayList;
 
+import static com.pm.blockchain.blockchain.TestChain.blockchain;
+import static com.pm.blockchain.blockchain.TestChain.difficulty;
+
 public class Chain {
 
-    public static Boolean isChainValid(ArrayList<Block> blockchain,int difficulty) {
+    public static Boolean isChainValid() {
         Block currentBlock;
         Block previousBlock;
         String hashTarget = new String(new char[difficulty]).replace('\0', '0');
