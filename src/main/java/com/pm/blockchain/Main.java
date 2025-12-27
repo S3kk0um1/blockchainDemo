@@ -60,7 +60,24 @@ public class Main {
         blockchain.add(block1);
         System.out.println("miner balance : " +minerWallet.getBalance());
         System.out.println("walletA balance : " +walletA.getBalance());
-        System.out.println(Chain.isChainValid());
+        System.out.println("\n--- DÉBUT DE LA TENTATIVE DE FRAUDE ---");
+
+        System.out.println("\n--- STARTING FRAUD SIMULATION ---");
+
+// 1. The hacker tries to modify an old transaction in the blockchain
+// He changes the value from 1.5 to 1000.0 in the first real block
+        blockchain.get(1).transactions.get(0).outputs.get(0).value = 1000f;
+        System.out.println("Hacker action: Modified a past transaction value to 1000.0");
+
+// 2. We run the security audit
+        System.out.println("Running security audit...");
+        boolean isSystemSecure = Chain.isChainValid();
+
+        if(!isSystemSecure) {
+            System.out.println("SUCCESS: The fraud was detected and blocked by the system!");
+        } else {
+            System.out.println("CRITICAL ERROR: The fraud was NOT detected. Security breach!");
+        }
 
 
         //Create a test transaction from WalletA to walletB
